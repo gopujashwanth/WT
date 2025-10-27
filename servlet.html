@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servlets: Server-Side Programming - Standalone Module</title>
+    
+    <style>
+        /* --- Global Styles & Reset (Copied from JDBC file) --- */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #28a745;
+            --accent-color: #ffc107;
+            --background-light: #f4f7f6;
+            --text-dark: #333;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Header & Footer --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Content Page Styles --- */
+        .content-section {
+            padding: 30px 0;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin-top: 40px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .content-section h3 {
+            color: var(--secondary-color);
+            font-size: 1.6em;
+            margin: 30px 0 10px;
+            padding-left: 10px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .content-section h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 15px 0 5px;
+        }
+
+        .content-section p, .content-section li {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .content-section ol, .content-section ul {
+            margin-left: 25px;
+            padding-bottom: 10px;
+            list-style-position: outside;
+        }
+
+        .content-section ul li {
+            list-style-type: disc;
+        }
+
+        .content-section ol li {
+            list-style-type: decimal;
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            margin: 20px 0;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+            line-height: 1.4;
+            white-space: pre;
+        }
+
+        .code-block strong {
+            color: var(--accent-color);
+            font-weight: normal;
+        }
+
+        /* Separator line style */
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary-color), rgba(0, 0, 0, 0));
+            margin: 40px 0;
+        }
+        
+        /* New Style for Image Container */
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 10px;
+        }
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .content-section h2 {
+                font-size: 1.8em;
+            }
+            .content-section h3 {
+                font-size: 1.4em;
+            }
+            .content-section ol, .content-section ul {
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Servlets: Introduction to Server-Side Programming (Unit 4)</h1>
+        <p>Mastering Java's role in handling requests, processing data, and generating dynamic responses.</p>
+    </header>
+
+    <main class="container content-section">
+
+        <!-- ========================================================= -->
+        <h2>Introduction to Servlets and Web Servers</h2>
+        <p>A **Servlet** is a Java class or web program that handles client requests, processes them (often interacting with databases), and replies back with a response, typically an HTML page. This is part of the Java EE stack.</p>
+        
+        <h3>Servlet Architecture Overview</h3>
+        <p>When a web server receives a request, it hands it to the **Servlet Container** (like Tomcat), which manages the lifecycle and execution of the Servlets.</p>
+        <div class="diagram-container">
+            <img src="https://ik.imagekit.io/upgrad1/abroad-images/imageCompo/images/ChatGPT_Image_May_20_2025_04_59_24_PM_CopyLAVWPG.png?pr-true" alt="Diagram showing the Servlet Architecture flow from client to server to servlet container.">
+            <p style="font-size:0.9em; margin-top: 10px; color: #666;">Servlet Architecture: Request flow via the web server and container.</p>
+        </div>
+        
+        <h3>CGI vs. Servlet</h3>
+        <p>Servlets are a highly efficient replacement for traditional **Common Gateway Interface (CGI)** programs:</p>
+        
+        <h4>CGI vs. Servlet Comparison</h4>
+        <ul>
+            <li>**Basic:** CGI programs are written in native OS; Servlets use **Java**.</li>
+            <li>**Platform Dependency:** CGI is platform-dependent; Servlets are **portable** (platform-independent).</li>
+            <li>**Process Creation:** CGI creates **its own process** for each client request (slow); Servlets use **threads** within the JVM (faster).</li>
+            <li>**Execution:** CGI runs on a separate process; Servlets run on the **JVM**.</li>
+            <li>**Security/Speed:** Servlets are **Faster** and **More Resistant to Attacks** than CGI.</li>
+        </ul>
+
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2>Servlet Life Cycle and Methods</h2>
+        <p>The **Servlet Life Cycle** is managed by the Servlet Container and defines how a Servlet is loaded, initialized, served, and destroyed.</p>
+
+        <h3>Servlet Life Cycle Steps</h3>
+        <p>The entire lifecycle consists of the following phases:</p>
+        <ol>
+            <li><strong>Servlet class is loaded.</strong></li>
+            <li><strong>Servlet instance is created.</strong></li>
+            <li>**<code>init()</code> method is invoked.** (Called only once for initialization.)</li>
+            <li>**<code>service()</code> method is invoked.** (Invoked at each client request.)</li>
+            <li>**<code>destroy()</code> method is invoked.** (Invoked only once when the servlet is being destroyed.)</li>
+        </ol>
+
+        <div class="diagram-container">
+            <img src="https://media.geeksforgeeks.org/wp-content/uploads/Life-Cycle-Of-Servlet.jpg" alt="Diagram illustrating the five stages of the Servlet life cycle: Load, Instantiate, Init, Service (loop), and Destroy.">
+            <p style="font-size:0.9em; margin-top: 10px; color: #666;">Visual representation of the Init-Service-Destroy sequence.</p>
+        </div>
+
+        <h3>Methods of the <code>Servlet</code> Interface</h3>
+        <p>The core <code>javax.servlet.Servlet</code> interface defines these methods that all servlets must implement:</p>
+        <div class="code-block">
+            public void <strong>init</strong>(ServletConfig config) 
+            // Initializes the servlet. Invoked only once.<br><br>
+            public void <strong>service</strong>(ServletRequest request, ServletResponse response)
+            // Provides response for the incoming request. Invoked at each request.<br><br>
+            public void <strong>destroy</strong>()
+            // Invoked only once, indicating the servlet is being destroyed.<br><br>
+            public ServletConfig <strong>getServletConfig</strong>()
+            // Returns the ServletConfig object.<br><br>
+            public String <strong>getServletInfo</strong>()
+            // Returns information about the servlet (writer, version, etc.).
+        </div>
+
+        <h3>Steps to Create a Servlet Example</h3>
+        <p>The servlet example can be created in three ways:</p>
+        <ul>
+            <li>By **implementing the <code>Servlet</code> interface**.</li>
+            <li>By **inheriting the <code>GenericServlet</code> class**.</li>
+            <li>By **inheriting the <code>HttpServlet</code> class** (most common for web applications).</li>
+        </ul>
+        
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2>Handling HTTP Request and Response</h2>
+
+        <h3>Servlet Execution Process and Container Role</h3>
+        <p>The **web container** is responsible for handling the request through these steps:</p>
+        <ol>
+            <li>The container **loads the servlet class** and **instantiates the servlet class**.</li>
+            <li>It **maps the request** with the servlet defined in the <code>web.xml</code> file.</li>
+            <li>It creates **Request and Response objects** (<code>HttpServletRequest</code> and <code>HttpServletResponse</code>).</li>
+            <li>It calls the **<code>init()</code> method** passing the <code>ServletConfig</code> object.</li>
+            <li>It calls the **<code>service()</code> method** on a thread.</li>
+            <li>The public <code>service()</code> method internally calls the protected <code>service()</code> method.</li>
+            <li>The protected <code>service()</code> method calls specific methods (like **<code>doGet()</code>** or **<code>doPost()</code>**) depending on the HTTP request type.</li>
+            <li>The <code>doGet</code>/<code>doPost</code> method generates the response, which is passed to the client.</li>
+            <li>After sending the response, the web container **deletes the request and response objects**.</li>
+        </ol>
+
+        <h3>Reading and Initialization of Servlet Parameters</h3>
+        <p>Servlet parameters can be read via the **<code>ServletRequest</code>** object (e.g., input from HTML forms) or initialized via the **<code>ServletConfig</code>** object (for initialization parameters).</p>
+
+        <h3>Redirection</h3>
+        <p>You can redirect the client to a different URL using the <code>sendRedirect()</code> method of the <code>HttpServletResponse</code> interface.</p>
+        <div class="code-block">
+            // Example of Redirection<br>
+            response.<strong>sendRedirect</strong>("http://newurl.com/success");
+        </div>
+
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2>Servlet Directory Structure and Deployment</h2>
+
+        <h3>Servlet Directory Structure</h3>
+        <p>A standard servlet application follows this directory layout, crucial for container deployment:</p>
+        <div class="diagram-container">
+            <img src="https://miro.medium.com/0*FxVSpmViZm_-C6op.JPG" alt="Diagram showing the Servlet Directory structure, including web-app, WEB-INF, classes, web.xml, and lib.">
+            <p style="font-size:0.9em; margin-top: 10px; color: #666;">The application structure is defined by the Java Servlet Specification.</p>
+        </div>
+        
+        <h3>Servlet Execution Process (Developer Steps)</h3>
+        <ol>
+            <li>**Create servlet** (Source code).</li>
+            <li>**Compile the servlet**: <code>Javac -cp .:servlet-api.jar Demoservlet.java</code> (Requires <code>servlet-api.jar</code>).</li>
+            <li>**Create the deployment descriptor** (<code>web.xml</code> file).</li>
+            <li>**Deployment**: Place the compiled <code>.class</code> file in the <code>WEB-INF/classes</code> folder.</li>
+            <li>**Testing**: Place the application folder into the webapps directory of your server (e.g., <code>C:\xampp\tomcat\webapps</code>) and start the Tomcat service.</li>
+        </ol>
+
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2><code>javax.servlet.*</code> and <code>javax.servlet.http.*</code> Packages</h2>
+        <p>These packages contain all the necessary APIs for developing Servlets.</p>
+
+        <h3><code>javax.servlet</code> Package (Protocol-Independent)</h3>
+        <h4>Interfaces:</h4>
+        <ul>
+            <li><code>Servlet</code> (Core behavior)</li>
+            <li><code>ServletRequest</code> / <code>ServletResponse</code></li>
+            <li><code>ServletConfig</code> / <code>ServletContext</code></li>
+            <li><code>RequestDispatcher</code></li>
+            <li><code>Filter</code>, <code>SingleThreadModel</code>, <code>ServletRequestListener</code></li>
+        </ul>
+        <h4>Classes:</h4>
+        <ul>
+            <li><code>GenericServlet</code>, <code>ServletException</code>, <code>UnavailableException</code></li>
+            <li><code>ServletInputStream</code> / <code>ServletOutputStream</code></li>
+            <li><code>ServletRequestWrapper</code> / <code>ServletResponseWrapper</code></li>
+            <li><code>ServletRequestEvent</code> / <code>ServletContextEvent</code></li>
+            <li><code>ServletRequestAttributeEvent</code> / <code>ServletContextAttributeEvent</code></li>
+        </ul>
+
+        <h3><code>javax.servlet.http</code> Package (HTTP Specific)</h3>
+        <h4>Interfaces:</h4>
+        <ul>
+            <li><code>HttpServletRequest</code> / <code>HttpServletResponse</code> (HTTP request/response handling)</li>
+            <li><code>HttpSession</code> (Core for session tracking)</li>
+            <li><code>HttpSessionListener</code></li>
+        </ul>
+        <h4>Classes:</h4>
+        <ul>
+            <li><code>HttpServlet</code> (HTTP base class)</li>
+            <li><code>Cookie</code></li>
+            <li><code>HttpServletRequestWrapper</code> / <code>HttpServletResponseWrapper</code></li>
+            <li><code>HttpSessionEvent</code></li>
+        </ul>
+
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2>Session and Cookie Management</h2>
+
+        <h3>Session Tracking in Servlets</h3>
+        <p>Session Tracking (or **session management**) is the way to **maintain state (data) of a user** across multiple client requests.</p>
+        
+        <h4>Session Tracking Techniques:</h4>
+        <ol>
+            <li>**Cookies**</li>
+            <li>**Hidden Form Field**</li>
+            <li>**URL Rewriting**</li>
+            <li>**HttpSession** (Most robust, relying on a unique session ID managed by the container).</li>
+        </ol>
+
+        <h3>Cookies</h3>
+        <p>A **Cookie** is a small piece of textual information stored in key-value pair format in the client's browser. It is persisted between multiple client requests.</p>
+        
+        <h4>Types of Cookies:</h4>
+        <ul>
+            <li>**Non-persistent cookie:** Valid for a **single session only**. Removed when the user closes the browser.</li>
+            <li>**Persistent cookie:** Valid for **multiple sessions**. Removed only if the user logs out or signs out.</li>
+        </ul>
+        
+        <h4>Cookie Code Examples:</h4>
+        <div class="code-block">
+            // 1. Creating and Setting Max Age (Persistence)<br>
+            Cookie ck = new Cookie("Name", name);<br>
+            ck.<strong>setMaxAge</strong>(24*60*60); // Max age in seconds (1 day)<br>
+            res.<strong>addCookie</strong>(ck); // Adding cookie to the response<br><br>
+            // 2. Getting cookies<br>
+            Cookie ck[] = request.<strong>getCookies</strong>();<br>
+            for(int i=0; i&lt;ck.length; i++) {<br>
+            &nbsp;&nbsp;out.print(ck[i].<strong>getName</strong>() + " " + ck[i].<strong>getValue</strong>());<br>
+            }<br><br>
+            // 3. Deleting a cookie<br>
+            Cookie ck_delete = new Cookie("user", "");<br>
+            ck_delete.<strong>setMaxAge</strong>(0); // Set max age to 0 seconds<br>
+            response.addCookie(ck_delete);<br>
+        </div>
+        
+        <h3>HttpSession Interface</h3>
+        <p>The container creates a **unique session ID** for each user to identify them. The <code>HttpSession</code> object is used to perform two tasks: **bind objects** and **view/manipulate session information** (ID, creation time, last accessed time).</p>
+        
+        <h4>Key <code>HttpServletRequest</code> Methods for Session:</h4>
+        <div class="code-block">
+            public HttpSession <strong>getSession</strong>() 
+            // Returns current session or creates one if none exists.<br><br>
+            public HttpSession <strong>getSession</strong>(boolean create) 
+            // Returns current session or creates one ONLY if 'create' is true.
+        </div>
+        
+        <h4>Common <code>HttpSession</code> Methods:</h4>
+        <ul>
+            <li><code>public String getId()</code>: Returns the unique identifier value.</li>
+            <li><code>public long getCreationTime()</code>: Returns the session creation time.</li>
+            <li><code>public long getLastAccessedTime()</code>: Returns the last time the client sent a request associated with this session.</li>
+            <li><code>public void invalidate()</code>: Invalidates the session then unbinds any objects bound to it.</li>
+        </ul>
+        
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2>Database Access using Servlets</h2>
+        <p>Servlets integrate with databases using the **JDBC** API. This is conceptually done by executing the JDBC steps within the Servlet's request handling methods (<code>doGet()</code> or <code>doPost()</code>) to fetch or update data, and then displaying the results in the HTML response.</p>
+        
+        <h4>Conceptual Code Flow for Database Access</h4>
+        <div class="code-block">
+            protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+                throws ServletException, IOException {<br>
+                // JDBC Steps (Load Driver, Get Connection)<br>
+                // Execute SQL (stmt.executeQuery("SELECT * FROM emp"))<br>
+                // Process ResultSet (while(rs.next()) { out.print(rs.getInt(1)); })<br>
+                // Close Connection<br>
+            }
+        </div>
+        
+    </main>
+
+    <footer>
+        <p><a href="index.html">Home</a> | <a href="jsp.html">Next Unit → JSP</a>  <br>&copy; 2025 Web Technologies Hub. All rights reserved.</p>
+        <p>Developed by: Jashwanth & Shashank</p>
+    </footer>
+
+</body>
+</html>

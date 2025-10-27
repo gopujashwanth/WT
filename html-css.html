@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Technologies - Unit I: HTML & CSS</title>
+<style>
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #28a745;
+    --accent-color: #ffc107;
+    --background-light: #f9fafb;
+    --text-dark: #333;
+    --shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+* {margin: 0; padding: 0; box-sizing: border-box;}
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+header {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: var(--shadow);
+}
+header h1 {font-size: 2.4em; margin-bottom: 8px;}
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+h2 {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+    margin: 40px 0 20px;
+    padding-bottom: 8px;
+    font-size: 2em;
+}
+h3 {
+    color: var(--secondary-color);
+    margin: 25px 0 10px;
+    font-size: 1.5em;
+}
+ul, ol {margin-left: 25px; margin-bottom: 15px;}
+.code-block {
+    background: #272822;
+    color: #f8f8f2;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: Consolas, monospace;
+    white-space: pre;
+    margin: 15px 0;
+    overflow-x: auto;
+}
+.diagram-container {
+    text-align: center;
+    margin: 30px 0;
+}
+.diagram-container img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    border-top: 1px solid #ddd;
+    color: #666;
+}
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+footer a:hover {text-decoration: underline;}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Web Technologies - Unit I</h1>
+    <p>HTML and CSS: Structure, Styling, and Design of Web Pages</p>
+</header>
+
+<main class="container">
+
+<h2>1. Introduction to HTML (HyperText Markup Language)</h2>
+<p><strong>HTML</strong> is the standard language for creating web pages and applications. It structures content using tags and elements interpreted by browsers.</p>
+
+<ul>
+<li><strong>HTML</strong> stands for <em>HyperText Markup Language</em>.</li>
+<li>Used to create web pages and web applications.</li>
+<li>Not a programming language, but a <strong>markup language</strong>.</li>
+<li>Forms the backbone of every website on the internet.</li>
+</ul>
+
+<h3>HyperText</h3>
+<p>“Text within text.” HyperText allows linking between web pages using hyperlinks (<code>&lt;a href&gt;</code>).</p>
+
+<h3>Markup Language</h3>
+<p>A language used to structure and format documents using tags and elements.</p>
+
+<h3>Basic Structure of an HTML Page</h3>
+<div class="diagram-container">
+    <img src="https://www.w3schools.com/html/img_notepad.png" alt="Basic HTML Structure Diagram">
+    <p style="font-size:0.9em; color:#555;">HTML Page Structure – HTML, Head, Body, and Elements</p>
+</div>
+
+<div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</div>
+
+<hr>
+
+<h2>2. Common HTML Tags</h2>
+<p>HTML uses tags to define page elements. Tags are enclosed in angle brackets &lt; &gt; and often come in pairs.</p>
+
+<ul>
+<li><code>&lt;h1&gt; to &lt;h6&gt;</code> — Headings</li>
+<li><code>&lt;p&gt;</code> — Paragraph</li>
+<li><code>&lt;a href="url"&gt;Link&lt;/a&gt;</code> — Anchor (link)</li>
+<li><code>&lt;img src="url" alt="text"&gt;</code> — Image</li>
+<li><code>&lt;ul&gt;</code> / <code>&lt;ol&gt;</code> — Lists</li>
+<li><code>&lt;table&gt;</code> — Table</li>
+<li><code>&lt;form&gt;</code> — Form for input</li>
+</ul>
+
+<div class="code-block">
+&lt;h1&gt;Welcome to HTML&lt;/h1&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;a href="https://example.com"&gt;Click here&lt;/a&gt;
+&lt;img src="image.jpg" alt="Sample"&gt;
+</div>
+
+<hr>
+
+<h2>3. HTML Lists</h2>
+<h3>Ordered and Unordered Lists</h3>
+<div class="code-block">
+&lt;ul&gt;
+    &lt;li&gt;HTML&lt;/li&gt;
+    &lt;li&gt;CSS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ol&gt;
+</div>
+
+<hr>
+
+<h2>4. Forms in HTML</h2>
+<p>Forms collect user input such as text, passwords, selections, and files.</p>
+
+<div class="code-block">
+&lt;form&gt;
+User Name: &lt;input type="text"&gt;&lt;br&gt;
+Password: &lt;input type="password"&gt;&lt;br&gt;
+Gender: &lt;input type="radio" name="g"&gt;Male
+&lt;input type="radio" name="g"&gt;Female&lt;br&gt;
+Hobbies: &lt;input type="checkbox"&gt;Cricket
+&lt;input type="checkbox"&gt;Chess&lt;br&gt;
+&lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+</div>
+
+<hr>
+
+<h2>5. HTML Tables</h2>
+<p>Used to display data in rows and columns.</p>
+
+<div class="diagram-container">
+    <img src="https://www.w3schools.com/html/img_table_elements.png" alt="HTML Table Structure">
+</div>
+
+<div class="code-block">
+&lt;table border="1"&gt;
+&lt;tr&gt;&lt;th&gt;S.No&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Roll&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;Swapna&lt;/td&gt;&lt;td&gt;101&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+</div>
+
+<hr>
+
+<h2>6. Introduction to CSS (Cascading Style Sheets)</h2>
+<p>CSS controls the presentation and design of HTML pages — colors, layout, fonts, and responsiveness.</p>
+
+<div class="diagram-container">
+    <img src="https://www.w3schools.com/css/img_selector.gif" alt="CSS Selector Diagram">
+</div>
+
+<h3>Syntax</h3>
+<div class="code-block">
+selector {
+    property: value;
+}
+</div>
+
+<h3>Advantages of CSS</h3>
+<ul>
+<li>Faster page load</li>
+<li>Easy formatting and maintenance</li>
+<li>Responsive design</li>
+<li>Reusability across multiple pages</li>
+</ul>
+
+<hr>
+
+<h2>7. Types of Style Sheets</h2>
+<ul>
+<li><strong>Inline CSS:</strong> inside an element using <code>style</code> attribute</li>
+<li><strong>Internal CSS:</strong> within &lt;style&gt; in &lt;head&gt;</li>
+<li><strong>External CSS:</strong> linked via <code>&lt;link&gt;</code> tag</li>
+</ul>
+
+<div class="code-block">
+&lt;h1 style="color:blue;"&gt;Inline CSS Example&lt;/h1&gt;
+</div>
+
+<div class="code-block">
+&lt;style&gt;
+h1 {color:green;}
+p {font-size:18px;}
+&lt;/style&gt;
+</div>
+
+<div class="code-block">
+&lt;link rel="stylesheet" href="style.css"&gt;
+</div>
+
+<hr>
+
+<h2>8. CSS Selectors</h2>
+<ul>
+<li><strong>Element Selector:</strong> h1 { color: red; }</li>
+<li><strong>Class Selector:</strong> .title { color: blue; }</li>
+<li><strong>ID Selector:</strong> #main { text-align: center; }</li>
+<li><strong>Group Selector:</strong> h1, p { color: purple; }</li>
+</ul>
+
+<div class="diagram-container">
+    <img src="https://www.w3schools.com/css/img_selector.gif" alt="CSS Selector Illustration">
+</div>
+
+<hr>
+
+<h2>9. CSS Properties</h2>
+<h3>Text and Background</h3>
+<div class="code-block">
+p {
+    color: red;
+    font-size: 18px;
+    background-color: lightyellow;
+}
+</div>
+
+<h3>Border and Margin</h3>
+<div class="code-block">
+div {
+    border: 2px solid blue;
+    margin: 20px;
+}
+</div>
+
+<h3>Table Styling</h3>
+<div class="code-block">
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+</div>
+
+<hr>
+
+<h2>10. HTML Media</h2>
+<p>HTML supports embedding of images, audio, and video.</p>
+
+<div class="code-block">
+&lt;video width="320" height="240" controls&gt;
+    &lt;source src="movie.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;
+</div>
+
+<hr>
+
+<h2>11. HTML Graphics (Canvas & SVG)</h2>
+<p>Used for rendering graphics, shapes, and animations in HTML5.</p>
+
+<h3>Canvas</h3>
+<div class="code-block">
+&lt;canvas id="myCanvas" width="200" height="100"&gt;&lt;/canvas&gt;
+&lt;script&gt;
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.fillStyle = "blue";
+ctx.fillRect(20, 20, 150, 50);
+&lt;/script&gt;
+</div>
+
+<h3>SVG (Scalable Vector Graphics)</h3>
+<div class="code-block">
+&lt;svg width="100" height="100"&gt;
+&lt;circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /&gt;
+&lt;/svg&gt;
+</div>
+
+<div class="diagram-container">
+    <img src="https://www.w3schools.com/graphics/img_canvas_smiley.gif" alt="HTML5 Canvas Example">
+</div>
+
+</main>
+
+<footer>
+    <p><a href="index.html">Home</a>| <a href="jsxml.html">Next Unit → JavaScript & xml</a> <br>&copy; 2025 Web Technologies Hub.</p>
+    <p>Developed by: Jashwanth & Shashank</p>
+</footer>
+
+</body>
+</html>

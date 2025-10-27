@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSP: Java Server Pages (Unit 5)</title>
+<style>
+:root {
+    --primary-color: #0069d9;
+    --secondary-color: #17a2b8;
+    --accent-color: #ffc107;
+    --background-light: #f8f9fa;
+    --text-dark: #343a40;
+    --shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+header {
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: var(--shadow);
+}
+header h1 { font-size: 2.4em; margin-bottom: 8px; }
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h2 {
+    color: var(--primary-color);
+    font-size: 2em;
+    border-bottom: 3px solid var(--primary-color);
+    margin: 40px 0 20px;
+    padding-bottom: 8px;
+}
+h3 {
+    color: var(--secondary-color);
+    font-size: 1.5em;
+    margin: 30px 0 10px;
+}
+h4 { color: #555; margin: 20px 0 8px; font-size: 1.2em; }
+ul, ol { margin-left: 25px; margin-bottom: 15px; }
+.code-block {
+    background: #272822;
+    color: #f8f8f2;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: Consolas, monospace;
+    font-size: 0.95em;
+    white-space: pre;
+    margin: 15px 0;
+}
+.diagram-container {
+    text-align: center;
+    margin: 25px 0;
+}
+.diagram-container img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    color: #777;
+}
+footer a { color: var(--primary-color); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>JSP: Java Server Pages (Unit 5)</h1>
+    <p>Dynamic web content generation using JSP technology — the simplified way to build server-side applications.</p>
+</header>
+
+<main class="container">
+
+<h2>Introduction to JSP</h2>
+<p><strong>JSP (Java Server Pages)</strong> allows embedding Java code into HTML pages to create dynamic web applications. It is an extension of Servlets, offering easier development and built-in features like Expression Language and JSTL.</p>
+
+<h3>Advantages of JSP over Servlets</h3>
+<ul>
+<li>Faster development — no recompilation required.</li>
+<li>Less code and easy to maintain.</li>
+<li>Supports Expression Language and Tag Libraries.</li>
+<li>Automatically converted into Servlets by the container.</li>
+</ul>
+
+<hr>
+
+<h2>JSP Life Cycle</h2>
+<p>The JSP lifecycle defines how a JSP page is created, executed, and destroyed by the web container.</p>
+
+<ol>
+<li>Translation of JSP Page</li>
+<li>Compilation of JSP Page</li>
+<li>Classloading</li>
+<li>Instantiation</li>
+<li>Initialization (<code>jspInit()</code>)</li>
+<li>Request Processing (<code>_jspService()</code>)</li>
+<li>Destroy (<code>jspDestroy()</code>)</li>
+</ol>
+
+<div class="diagram-container">
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230315174153/Untitledm.png" alt="JSP Life Cycle Diagram">
+    <p style="font-size:0.9em; color:#666;">JSP Life Cycle: From translation to destruction</p>
+</div>
+
+<div class="code-block">
+public void jspInit() { ... }  // Called once during initialization
+public void _jspService() { ... }  // Invoked for each client request
+public void jspDestroy() { ... }  // Called before JSP is unloaded
+</div>
+
+<hr>
+
+<h2>JSP API Overview</h2>
+<p>The JSP API consists of two main packages:</p>
+<ul>
+<li><code>javax.servlet.jsp</code></li>
+<li><code>javax.servlet.jsp.tagext</code></li>
+</ul>
+
+<h3>JspPage Interface Hierarchy</h3>
+<div class="diagram-container">
+    <img src="https://dotnettutorials.net/wp-content/uploads/2022/08/clip_image002-57.jpg" alt="JspPage Interface Hierarchy">
+    <p style="font-size:0.9em; color:#666;">JspPage → HttpJspPage Interface Hierarchy</p>
+</div>
+
+<hr>
+
+<h2>JSP Elements</h2>
+<h3>Scripting Elements</h3>
+<ul>
+<li><strong>Scriptlet:</strong> &lt;% Java code %&gt;</li>
+<li><strong>Expression:</strong> &lt;%= value %&gt;</li>
+<li><strong>Declaration:</strong> &lt;%! variable/method %&gt;</li>
+</ul>
+
+<div class="code-block">
+&lt;html&gt;
+&lt;body&gt;
+&lt;% out.print("Hello JSP!"); %&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</div>
+
+<h3>Directive Elements</h3>
+<p>Directives provide instructions to the container about page settings and behavior.</p>
+<ul>
+<li><strong>Page Directive:</strong> &lt;%@ page import="java.util.Date" %&gt;</li>
+<li><strong>Include Directive:</strong> &lt;%@ include file="header.html" %&gt;</li>
+<li><strong>Taglib Directive:</strong> &lt;%@ taglib uri="..." prefix="..." %&gt;</li>
+</ul>
+
+<hr>
+
+<h2>Action Elements</h2>
+<p>Action tags provide control over page flow and JavaBean interaction.</p>
+
+<ul>
+<li><code>&lt;jsp:forward&gt;</code> — forwards request to another page.</li>
+<li><code>&lt;jsp:include&gt;</code> — includes another resource dynamically.</li>
+<li><code>&lt;jsp:useBean&gt;</code> — locates or instantiates a bean.</li>
+</ul>
+
+<div class="code-block">
+&lt;jsp:useBean id="user" class="com.demo.User" /&gt;<br>
+&lt;jsp:setProperty name="user" property="username" value="Admin" /&gt;<br>
+&lt;jsp:getProperty name="user" property="username" /&gt;
+</div>
+
+<hr>
+
+<h2>Database Access using JSP</h2>
+<div class="code-block">
+&lt;%@ page import="java.sql.*" %&gt;<br>
+&lt;%<br>
+try {<br>
+    Class.forName("com.mysql.jdbc.Driver");<br>
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db","root","");<br>
+    Statement st = con.createStatement();<br>
+    ResultSet rs = st.executeQuery("SELECT * FROM student");<br>
+    while(rs.next()) {<br>
+        out.println(rs.getString(1));<br>
+    }<br>
+    con.close();<br>
+} catch(Exception e){ out.println(e); }<br>
+%&gt;
+</div>
+
+</main>
+
+<footer>
+    <p><a href="index.html">Home</a> | <a href="jdbc.html">Next Unit → JDBC</a> <br>&copy; 2025 Web Technologies Hub.</p>
+    <p>Developed by: Jashwanth & Shashank</p>
+</footer>
+
+</body>
+</html>

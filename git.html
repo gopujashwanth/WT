@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Technologies - Unit V: Git and Version Control System</title>
+<style>
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #28a745;
+    --accent-color: #ffc107;
+    --background-light: #f9fafb;
+    --text-dark: #333;
+    --shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+* {margin: 0; padding: 0; box-sizing: border-box;}
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+header {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: var(--shadow);
+}
+header h1 {font-size: 2.4em; margin-bottom: 8px;}
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+h2 {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+    margin: 40px 0 20px;
+    padding-bottom: 8px;
+    font-size: 2em;
+}
+h3 {
+    color: var(--secondary-color);
+    margin: 25px 0 10px;
+    font-size: 1.5em;
+}
+ul, ol {margin-left: 25px; margin-bottom: 15px;}
+.code-block {
+    background: #272822;
+    color: #f8f8f2;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: Consolas, monospace;
+    white-space: pre;
+    margin: 15px 0;
+    overflow-x: auto;
+}
+.diagram-container {
+    text-align: center;
+    margin: 30px 0;
+}
+.diagram-container img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    border-top: 1px solid #ddd;
+    color: #666;
+}
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+footer a:hover {text-decoration: underline;}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Web Technologies - Unit V</h1>
+    <p>Git and Version Control System</p>
+</header>
+
+<main class="container">
+
+<h2>1. Version Control System (VCS)</h2>
+<p><strong>Version Control System</strong> is a tool that helps developers track and manage changes to source code over time.</p>
+<ul>
+<li>Maintains multiple versions of a project.</li>
+<li>Allows collaboration among multiple developers.</li>
+<li>Supports rollback to previous versions if needed.</li>
+</ul>
+
+<div class="diagram-container">
+    <img src="https://www.toolsqa.com/wp-content/uploads/2020/05/GitHub-VCS-Example.png" alt="Version Control System Diagram">
+    <p style="font-size:0.9em; color:#555;">Centralized and Distributed Version Control Concept</p>
+</div>
+
+<hr>
+
+<h2>2. What is Git?</h2>
+<p><strong>Git</strong> is a distributed version control system developed by <em>Linus Torvalds</em> in 2005. It allows multiple developers to work on the same codebase simultaneously without overwriting each other’s work.</p>
+
+<div class="diagram-container">
+    <img src="https://www.jrebel.com/sites/default/files/image/2020-05/image-blog-whatisgit-diagram.png" alt="Git Workflow Diagram">
+    <p style="font-size:0.9em; color:#555;">Git Workflow Overview</p>
+</div>
+
+<h3>Features of Git</h3>
+<ul>
+<li><strong>Distributed:</strong> Every developer has a complete local copy of the repository.</li>
+<li><strong>Speed:</strong> Git is optimized for performance.</li>
+<li><strong>Branching and Merging:</strong> Flexible branching strategy for parallel development.</li>
+<li><strong>Staging Area:</strong> Allows you to prepare commits before saving.</li>
+<li><strong>Collaboration:</strong> Easily integrates with GitHub, GitLab, and Bitbucket.</li>
+<li><strong>Open Source:</strong> Free and widely used across the world.</li>
+</ul>
+
+<hr>
+
+<h2>3. Git Workflow</h2>
+<p>The Git workflow defines the process of managing files through different states:</p>
+<ul>
+<li><strong>Working Directory:</strong> Contains project files being worked on.</li>
+<li><strong>Staging Area (Index):</strong> Holds changes before committing.</li>
+<li><strong>Local Repository:</strong> Stores committed code versions on the user’s system.</li>
+<li><strong>Remote Repository:</strong> Stores code on a remote server (e.g., GitHub).</li>
+</ul>
+
+<div class="diagram-container">
+    <img src="https://miro.medium.com/v2/resize:fit:1200/1*U93uYwAVmJcM8QzCIE1mRg.png" alt="Git Workflow Image">
+    <p style="font-size:0.9em; color:#555;">Git Workflow: Working Directory → Staging → Local → Remote</p>
+</div>
+
+<hr>
+
+<h2>4. Common Git Commands</h2>
+<p>Here are some frequently used Git commands:</p>
+<div class="code-block">
+git init                # Create a new local repository
+git status              # View status of files (modified/staged/untracked)
+git add &lt;file&gt;          # Add file to staging area
+git commit -m "message" # Save changes to local repo
+git diff                # Show changes between commits
+git clone &lt;url&gt;         # Copy remote repo to local
+git push                # Upload commits to remote repo
+git pull                # Download latest changes from remote
+git branch              # List all branches
+git config              # Configure username and email
+</div>
+
+<hr>
+
+<h2>5. Branching and Merging</h2>
+<p><strong>Branching</strong> allows developers to create isolated environments for new features, while <strong>merging</strong> integrates those changes into the main branch.</p>
+<ul>
+<li>Create a branch to develop a feature separately.</li>
+<li>After testing, merge the feature branch back to the main branch.</li>
+</ul>
+
+<div class="code-block">
+git branch new-feature      # Create a new branch
+git checkout new-feature    # Switch to the new branch
+git merge new-feature       # Merge branch into main
+git branch -d new-feature   # Delete the branch
+</div>
+
+<div class="diagram-container">
+    <img src="https://www.atlassian.com/git/images/tutorials/collaborating/using-branches/01.svg" alt="Git Branching and Merging Diagram">
+    <p style="font-size:0.9em; color:#555;">Branching and Merging in Git</p>
+</div>
+
+<hr>
+
+<h2>6. Advantages of Git</h2>
+<ul>
+<li>Facilitates collaboration and teamwork.</li>
+<li>Maintains complete version history of changes.</li>
+<li>Supports distributed development.</li>
+<li>Fast and efficient for large projects.</li>
+<li>Reliable and open-source.</li>
+</ul>
+
+<hr>
+
+<h2>7. Git Hosting Services</h2>
+<ul>
+<li><strong>GitHub:</strong> Cloud-based Git repository hosting with collaboration tools.</li>
+<li><strong>GitLab:</strong> Open-source Git platform for CI/CD and DevOps.</li>
+<li><strong>Bitbucket:</strong> Repository hosting service by Atlassian.</li>
+</ul>
+
+<div class="diagram-container">
+    <img src="https://cdn-images-1.medium.com/max/1200/1*7e1gyvQv1vhYzEBjhRzRFA.png" alt="Git Hosting Platforms">
+    <p style="font-size:0.9em; color:#555;">Popular Git Hosting Platforms</p>
+</div>
+
+</main>
+
+<footer>
+    <p><a href="index.html">Home</a> |<a href="mvc.html">Go to MVC Architecture </a> <br>&copy; 2025 Web Technologies Hub.</p>
+    <p>Developed by: Jashwanth & Shashank</p>
+</footer>
+
+</body>
+</html>

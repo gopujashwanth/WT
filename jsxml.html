@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Technologies - Unit II: JavaScript and XML</title>
+<style>
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #28a745;
+    --accent-color: #ffc107;
+    --background-light: #f9fafb;
+    --text-dark: #333;
+    --shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+* {margin: 0; padding: 0; box-sizing: border-box;}
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+header {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: var(--shadow);
+}
+header h1 {font-size: 2.4em; margin-bottom: 8px;}
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+h2 {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+    margin: 40px 0 20px;
+    padding-bottom: 8px;
+    font-size: 2em;
+}
+h3 {
+    color: var(--secondary-color);
+    margin: 25px 0 10px;
+    font-size: 1.5em;
+}
+ul, ol {margin-left: 25px; margin-bottom: 15px;}
+.code-block {
+    background: #272822;
+    color: #f8f8f2;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: Consolas, monospace;
+    white-space: pre;
+    margin: 15px 0;
+    overflow-x: auto;
+}
+.diagram-container {
+    text-align: center;
+    margin: 30px 0;
+}
+.diagram-container img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    border-top: 1px solid #ddd;
+    color: #666;
+}
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+footer a:hover {text-decoration: underline;}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Web Technologies - Unit II</h1>
+    <p>JavaScript and XML: Dynamic Web Pages and Data Representation</p>
+</header>
+
+<main class="container">
+
+<h2>1. Introduction to JavaScript</h2>
+<p><strong>JavaScript</strong> is a client-side scripting language used to make web pages dynamic and interactive. It runs inside web browsers and can manipulate HTML, CSS, and handle user interactions.</p>
+
+<ul>
+<li>JavaScript is an interpreted language.</li>
+<li>Developed by Brendan Eich in 1995.</li>
+<li>Follows Object-Based and Event-Driven paradigms.</li>
+<li>Can be embedded directly in HTML.</li>
+</ul>
+
+<div class="diagram-container">
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230804145956/JavaScript-Working.png" alt="JavaScript Working Diagram">
+    <p style="font-size:0.9em; color:#555;">JavaScript Flow: HTML → Browser → JavaScript Engine</p>
+</div>
+
+<div class="code-block">
+&lt;script&gt;
+document.write("Welcome to JavaScript!");
+&lt;/script&gt;
+</div>
+
+<hr>
+
+<h2>2. JavaScript Syntax and Variables</h2>
+<p>JavaScript statements are separated by semicolons and can declare variables using <code>var</code>, <code>let</code>, or <code>const</code>.</p>
+
+<div class="code-block">
+let name = "John";
+var age = 22;
+const country = "India";
+</div>
+
+<ul>
+<li><strong>var</strong> – function scoped</li>
+<li><strong>let</strong> – block scoped</li>
+<li><strong>const</strong> – cannot be reassigned</li>
+</ul>
+
+<hr>
+
+<h2>3. Data Types and Operators</h2>
+<p>JavaScript supports primitive and object data types.</p>
+
+<ul>
+<li>Primitive: String, Number, Boolean, Null, Undefined</li>
+<li>Objects: Array, Function, Date, etc.</li>
+</ul>
+
+<h3>Operators:</h3>
+<p>+, -, *, /, %, ++, --, ==, ===, &&, ||, !</p>
+
+<div class="code-block">
+let a = 5, b = 2;
+console.log(a + b); // 7
+console.log(a * b); // 10
+console.log(a == b); // false
+</div>
+
+<hr>
+
+<h2>4. Control Statements</h2>
+<p>Used to control program flow using decisions and loops.</p>
+
+<div class="code-block">
+if (age >= 18) {
+  console.log("Adult");
+} else {
+  console.log("Minor");
+}
+
+for (let i=1; i&lt;=5; i++) {
+  console.log(i);
+}
+</div>
+
+<hr>
+
+<h2>5. Functions in JavaScript</h2>
+<p>Functions are reusable blocks of code that perform a specific task.</p>
+
+<div class="code-block">
+function greet(name) {
+  return "Hello, " + name + "!";
+}
+console.log(greet("Alice"));
+</div>
+
+<h3>Arrow Function Example</h3>
+<div class="code-block">
+const add = (x, y) => x + y;
+console.log(add(5, 10));
+</div>
+
+<hr>
+
+<h2>6. Arrays and Objects</h2>
+
+<h3>Arrays</h3>
+<div class="code-block">
+let fruits = ["Apple", "Banana", "Mango"];
+console.log(fruits[1]); // Banana
+</div>
+
+<h3>Objects</h3>
+<div class="code-block">
+let student = {
+  name: "Rahul",
+  roll: 101,
+  course: "CSE"
+};
+console.log(student.name);
+</div>
+
+<hr>
+
+<h2>7. String and Math Functions</h2>
+<div class="code-block">
+let str = "Web Technologies";
+console.log(str.length);
+console.log(str.toUpperCase());
+
+let num = Math.sqrt(25);
+console.log(num); // 5
+</div>
+
+<hr>
+
+<h2>8. Events in JavaScript</h2>
+<p>Events are user interactions that trigger scripts (click, mouseover, keypress, etc.).</p>
+
+<div class="diagram-container">
+    <img src="https://www.w3schools.com/js/pic_htmltree.gif" alt="Event Flow Model">
+    <p style="font-size:0.9em; color:#555;">JavaScript Event Handling Flow</p>
+</div>
+
+<div class="code-block">
+&lt;button onclick="alert('Button Clicked!')"&gt;Click Me&lt;/button&gt;
+</div>
+
+<hr>
+
+<h2>9. Error Handling</h2>
+<p>JavaScript handles runtime errors using try–catch–finally blocks.</p>
+
+<div class="code-block">
+try {
+  let result = 10 / 0;
+  throw "Custom Error Example";
+} catch (error) {
+  console.log("Error: " + error);
+} finally {
+  console.log("Execution Completed");
+}
+</div>
+
+<hr>
+
+<h2>10. Introduction to XML (eXtensible Markup Language)</h2>
+<p><strong>XML</strong> is a markup language used to store and transport data. It is both human-readable and machine-readable.</p>
+
+<ul>
+<li>Self-descriptive and platform-independent</li>
+<li>Used for data interchange (like JSON)</li>
+<li>Defines user-specific tags</li>
+</ul>
+
+<div class="diagram-container">
+    <img src="https://www.w3schools.com/xml/note.gif" alt="XML Tree Structure">
+    <p style="font-size:0.9em; color:#555;">XML Hierarchical Tree Structure</p>
+</div>
+
+<div class="code-block">
+&lt;note&gt;
+  &lt;to&gt;Alice&lt;/to&gt;
+  &lt;from&gt;Bob&lt;/from&gt;
+  &lt;message&gt;Hello, Welcome to XML!&lt;/message&gt;
+&lt;/note&gt;
+</div>
+
+<hr>
+
+<h2>11. XML Syntax Rules</h2>
+<ul>
+<li>Must have a root element.</li>
+<li>Tags are case-sensitive.</li>
+<li>All tags must be properly nested.</li>
+<li>Attribute values must be quoted.</li>
+</ul>
+
+<hr>
+
+<h2>12. DTD (Document Type Definition)</h2>
+<p>Defines the structure and rules for XML documents.</p>
+
+<div class="code-block">
+&lt;!DOCTYPE note [
+  &lt;!ELEMENT note (to,from,message)&gt;
+  &lt;!ELEMENT to (#PCDATA)&gt;
+  &lt;!ELEMENT from (#PCDATA)&gt;
+  &lt;!ELEMENT message (#PCDATA)&gt;
+]&gt;
+</div>
+
+<hr>
+
+<h2>13. XML Schema</h2>
+<p>XML Schema (XSD) defines the structure of an XML document using data types and constraints.</p>
+
+<div class="code-block">
+&lt;xs:element name="student"&gt;
+  &lt;xs:complexType&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element name="name" type="xs:string"/&gt;
+      &lt;xs:element name="roll" type="xs:integer"/&gt;
+    &lt;/xs:sequence&gt;
+  &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+</div>
+
+<hr>
+
+<h2>14. XML Parsers</h2>
+<p>XML Parsers are used to read and manipulate XML documents.</p>
+<ul>
+<li><strong>DOM Parser:</strong> Loads entire XML into memory as a tree.</li>
+<li><strong>SAX Parser:</strong> Reads XML sequentially (event-based).</li>
+</ul>
+
+<div class="diagram-container">
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230801122915/XML-Parsing-Process.png" alt="XML Parsing Process">
+</div>
+
+</main>
+
+<footer>
+    <p><a href="index.html">Home</a> | <a href="servlet.html">Next Unit → Servlets</a><br>
+    <br>&copy; 2025 Web Technologies Hub.</p>
+        <p>Developed by: Jashwanth & Shashank</p>
+</footer>
+
+</body>
+</html>

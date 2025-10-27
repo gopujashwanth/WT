@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Technologies Learning Hub</title>
+
+    <style>
+        /* --- Global Styles & Reset --- */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #28a745;
+            --background-light: #f4f7f6;
+            --text-dark: #333;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Header & Footer --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 0.9em;
+            background: #fff;
+        }
+
+        /* --- Topic Sections --- */
+        .topic-section {
+            margin-bottom: 40px;
+            padding: 20px 0;
+        }
+
+        .topic-section h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* --- Card Styles --- */
+        .card {
+            display: block; /* Makes the entire card clickable */
+            text-decoration: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .card p {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        /* Color variations for visual distinction */
+        .card.primary {
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .card.primary h3 {
+            color: var(--primary-color);
+        }
+
+        .card.secondary {
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .card.secondary h3 {
+            color: var(--secondary-color);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            .topic-section h2 { font-size: 1.5em; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌐 Mastering Web Tech.</h1>
+        <p>Your comprehensive resource for mastering core web technologies.</p>
+    </header>
+
+    <main class="container">
+        <!-- Front-End Section -->
+        <section class="topic-section">
+            <h2>Front-End Essentials</h2>
+            <div class="card-grid">
+                <a href="html-css.html" class="card primary">
+                    <h3>HTML & CSS</h3>
+                    <p>Structure and Style: Tags, Selectors, Layouts, and Media.</p>
+                </a>
+                <a href="jsxml.html" class="card secondary">
+                    <h3>JavaScript & XML</h3>
+                    <p>Client-side scripting, interactivity, and data structuring with DOM.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Back-End Section -->
+        <section class="topic-section">
+            <h2>Back-End Java Development</h2>
+            <div class="card-grid">
+                <a href="servlet.html" class="card primary">
+                    <h3>Servlets</h3>
+                    <p>Server-side programming, life cycle, request/response handling.</p>
+                </a>
+                <a href="jsp.html" class="card secondary">
+                    <h3>JSP (JavaServer Pages)</h3>
+                    <p>Presentation layer, scripting elements, and MVC Architecture.</p>
+                </a>
+                <a href="jdbc.html" class="card primary">
+                    <h3>JDBC</h3>
+                    <p>Connecting Java applications to databases (Drivers, Statements, ResultSet).</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Developer Tools Section -->
+        <section class="topic-section">
+            <h2>Developer Tools & Architecture</h2>
+            <div class="card-grid">
+                <a href="git.html" class="card secondary">
+                    <h3>Source Code Management (GIT)</h3>
+                    <p>Version control, branching, remote repositories, and workflow.</p>
+                </a>
+                <a href="mvc.html" class="card primary">
+                    <h3>MVC Architecture</h3>
+                    <p>Understanding the Model-View-Controller design pattern.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+    <p>&copy; 2025 Web Technologies Hub. Start your learning journey today!</p>
+    <p>Developed by:
+        <a href="https://www.linkedin.com/in/gopu-jashwanth" target="_blank">Jashwanth</a> & 
+        <a href="https://www.linkedin.com/in/karne-shashank-50b75a320?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Shashank</a>
+        </p>
+</footer>
+
+
+</body>
+</html>

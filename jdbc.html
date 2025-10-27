@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JDBC: Java Database Connectivity - Standalone Module</title>
+    
+    <style>
+        /* --- Global Styles & Reset --- */
+        :root {
+            --primary-color: #007bff; /* Blue - For headers, main accents */
+            --secondary-color: #28a745; /* Green - For subheadings, accents */
+            --accent-color: #ffc107; /* Yellow/Amber - For code highlights */
+            --background-light: #f4f7f6; /* Light gray background */
+            --text-dark: #333;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif; /* Using a modern, clean font */
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Header & Footer --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Content Page Styles (Used by jdbc.html) --- */
+        .content-section {
+            padding: 30px 0;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin-top: 40px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .content-section h3 {
+            color: var(--secondary-color);
+            font-size: 1.6em;
+            margin: 30px 0 10px;
+            padding-left: 10px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .content-section h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 15px 0 5px;
+        }
+
+        .content-section p, .content-section li {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .content-section ol, .content-section ul {
+            margin-left: 25px;
+            padding-bottom: 10px;
+            list-style-position: outside; /* Ensure list markers are visible */
+        }
+
+        .content-section ul li {
+            list-style-type: disc;
+        }
+
+        .content-section ol li {
+            list-style-type: decimal;
+        }
+
+        /* Code Block Styling - Essential for readability of Java code */
+        .code-block {
+            background-color: #272822; /* Dark background for code (Monokai-like) */
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            margin: 20px 0;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+            line-height: 1.4;
+            white-space: pre; /* Preserve whitespace for code formatting */
+        }
+
+        /* Highlighted keywords within the code blocks, if manually added */
+        .code-block strong {
+            color: var(--accent-color); 
+            font-weight: normal;
+        }
+
+        /* Separator line style */
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary-color), rgba(0, 0, 0, 0));
+            margin: 40px 0;
+        }
+        
+        /* New Style for Image Container */
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .diagram-container img {
+            max-width: 90%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .content-section h2 {
+                font-size: 1.8em;
+            }
+            .content-section h3 {
+                font-size: 1.4em;
+            }
+            .content-section ol, .content-section ul {
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>UNIT-3: JDBC (Java Database Connectivity)</h1>
+        <p>Connecting Java applications to relational databases for robust, data-driven systems.</p>
+    </header>
+
+    <main class="container content-section">
+
+        <!-- ========================================================= -->
+        <h2>Introduction to JDBC</h2>
+        <p><strong>JDBC (Java Database Connectivity)</strong> is a Java API to connect and execute queries with the database. It is a part of JavaSE (Java Standard Edition).</p>
+        <p>JDBC API allows Java programs to connect to databases. Database access is the same for all database vendors, as the **JVM uses a JDBC driver to translate generalized JDBC calls into vendor specific database calls**.</p>
+
+        <h3>Typical JDBC Programming Procedure (5 Steps)</h3>
+        <p>The complete workflow for interacting with a database usually follows these steps:</p>
+        <ol>
+            <li><strong>Load the database driver:</strong> Register the Driver class (e.g., <code>Class.forName("oracle.jdbc.driver.OracleDriver")</code>).</li>
+            <li><strong>Obtain a connection:</strong> Establish a secure connection using <code>DriverManager</code>.</li>
+            <li><strong>Create and execute statements (SQL queries):</strong> Prepare SQL commands for execution.</li>
+            <li><strong>Use result sets (tables) to navigate through the results:</strong> Process the data returned by <code>SELECT</code> queries.</li>
+            <li><strong>Close the connection:</strong> Release the database resources.</li>
+        </ol>
+        
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2>Types of JDBC Drivers</h2>
+        <p>There are four general types of JDBC drivers:</p>
+        
+        <h3>1. Type-1 Driver (JDBC-ODBC Bridge Driver)</h3>
+        <ul>
+            <li><strong>Mechanism:</strong> Uses an **ODBC driver** to connect to the database. It converts JDBC method calls into ODBC function calls.</li>
+            <li><strong>Note:</strong> Type-1 driver is also called **Universal driver** because it can be used to connect to any database that has an ODBC driver.</li>
+        </ul>
+
+        <h3>2. Type-2 Driver (Native-API Driver)</h3>
+        <ul>
+            <li><strong>Mechanism:</strong> Uses the client-side libraries of the database. This driver converts JDBC method calls into **native calls of the database API**.</li>
+            <li><strong>Note:</strong> Data transfer is much more secure compared to Type-1, but requires native database libraries on the client machine.</li>
+        </ul>
+
+        <h3>3. Type-3 Driver (Network Protocol Driver)</h3>
+        <ul>
+            <li><strong>Mechanism:</strong> Fully written in Java (portable). Uses **middleware (application server)** that converts JDBC calls into the vendor-specific database protocol.</li>
+            <li><strong>Pros:</strong> Highly portable; no need for individual client-side installation of drivers.</li>
+        </ul>
+
+        <h3>4. Type-4 Driver (Thin Driver / Native Protocol Driver)</h3>
+        <ul>
+            <li><strong>Mechanism:</strong> Interacts **directly with the database** using the native protocol. This driver is entirely written in Java.</li>
+            <li><strong>Note:</strong> It does not require any native database library, which is why it is known as the **Thin Driver**. It is the most common choice today.</li>
+        </ul>
+
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2>Establishing Connection with Data Base (DriverManager)</h2>
+
+        <h3>DriverManager Class</h3>
+        <p>The purpose of the <code>java.sql.DriverManager</code> class is to provide a common access layer on top of different database drivers. It requires that each driver must be registered before use.</p>
+
+        <h4>Driver Loading and Connection</h4>
+        <p>This demonstrates the two initial steps (Load Driver and Obtain Connection) for a Type 4 JDBC Driver (Oracle):</p>
+        <div class="code-block">
+            // 1. Load the database driver using ClassLoader<br>
+            Class.forName ("oracle.jdbc.driver.OracleDriver");<br><br>
+            // 2. Obtain a Connection<br>
+            Connection con = DriverManager.getConnection (<br>
+            &nbsp;&nbsp;"jdbc:oracle:thin:@bonsai.ite.gmu.edu:1521:ite", // JDBC URL<br>
+            &nbsp;&nbsp;"accountname", // Database Username<br>
+            &nbsp;&nbsp;"password"); // Database Password
+        </div>
+        
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2><code>java.sql.*</code> Package: Interfaces and Statements</h2>
+        <p>The <code>java.sql</code> package contains the core classes and interfaces for the JDBC API.</p>
+        
+        <h3>Key Interfaces of <code>java.sql.*</code></h3>
+        <p>The most important interfaces are:</p>
+        <ul>
+            <li><code>Driver</code> interface</li>
+            <li><code>Connection</code> interface</li>
+            <li><code>Statement</code> interface</li>
+            <li><code>PreparedStatement</code> interface</li>
+            <li><code>CallableStatement</code> interface</li>
+            <li><code>ResultSet</code> interface</li>
+            <li><code>ResultSetMetaData</code> interface</li>
+            <li><code>DatabaseMetaData</code> interface</li>
+            <li><code>RowSet</code> interface</li>
+        </ul>
+        
+        <h3>1. <code>Statement</code> Interface</h3>
+        <p>The <code>Statement</code> interface provides methods to execute queries with the database. It acts as a factory for <code>ResultSet</code> objects.</p>
+        <ul>
+            <li><strong><code>public ResultSet executeQuery(String sql)</code>:</strong> Used to execute <code>SELECT</code> queries.</li>
+            <li><strong><code>public int executeUpdate(String sql)</code>:</strong> Used to execute DDL (<code>CREATE</code>, <code>DROP</code>, <code>ALTER</code>) or DML (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) queries. Returns the number of rows affected.</li>
+            <li><strong><code>public boolean execute(String sql)</code>:</strong> Used for queries that may return multiple results.</li>
+        </ul>
+        
+        <h4>Creating Tables and Data (DDL/DML)</h4>
+        <p>Statements that create, alter, or drop a table are DDL (Data Definition Language) statements and are executed with <code>executeUpdate()</code>.</p>
+        <div class="code-block">
+            Statement stmt = con.createStatement();<br><br>
+            // Creating a table (DDL)<br>
+            stmt.executeUpdate (<br>
+            &nbsp;&nbsp;"CREATE TABLE COFFEES (COF_NAME VARCHAR(32), SUP_ID INTEGER, " + <br>
+            &nbsp;&nbsp;"PRICE FLOAT, SALES INTEGER, TOTAL INTEGER)");<br><br>
+            // Inserting data (DML)<br>
+            stmt.executeUpdate ( "INSERT INTO COFFEES " + <br>
+            &nbsp;&nbsp;"VALUES ('Colombian', 101, 7.99, 0, 0)");<br>
+            stmt.executeUpdate ( "INSERT INTO COFFEES " + <br>
+            &nbsp;&nbsp;"VALUES ('French_Roast', 49, 8.99, 0, 0)" ); <br>
+            // ... more inserts
+        </div>
+        <p>In practice, <code>executeUpdate</code> is used more often to **update** tables than to create them. However, <code>executeQuery</code> is the method used most often for executing **SELECT** statements.</p>
+
+
+        <h3>2. <code>PreparedStatement</code> Interface</h3>
+        <p>The <code>PreparedStatement</code> interface is a subinterface of <code>Statement</code> used to execute **parameterized queries**. This uses placeholders (<code>?</code>) for values, which are set using setter methods (e.g., <code>setString()</code>, <code>setFloat()</code>).</p>
+        <div class="code-block">
+            String sql="INSERT INTO emp VALUES(?, ?, ?)";<br>
+            PreparedStatement pstmt = con.prepareStatement(sql);<br><br>
+            // Value is set by calling the setter methods<br>
+            // pstmt.setString(1, "Value for first ?");<br><br>
+            pstmt.executeUpdate();
+        </div>
+
+        <h3>3. <code>CallableStatement</code> Interface</h3>
+        <p>Used to call **stored procedures and functions** from a Java program. Stored procedures are beneficial for complex scenarios and executing logic directly on the database server.</p>
+        <div class="code-block">
+            // Calling a stored procedure named 'myprocedure'<br>
+            CallableStatement stmt = con.prepareCall("{call myprocedure(?,?)}");
+        </div>
+        
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2><code>ResultSet</code> and <code>ResultSetMetaData</code></h2>
+
+        <h3><code>ResultSet</code> Interface</h3>
+        <p>The <code>ResultSet</code> object maintains a cursor pointing to a row of the table returned by a <code>SELECT</code> query. Initially, the cursor points to before the first row. The <code>rs.next()</code> method moves the cursor to the next row.</p>
+        
+        <h4>Getting Data From a Table</h4>
+        <div class="code-block">
+            ResultSet rs = stmt.executeQuery ("SELECT COF_NAME, PRICE FROM COFFEES");<br><br>
+            while (rs.next()) <br>
+            { <br>
+            &nbsp;&nbsp;String s = rs.getString ("COF_NAME");<br>
+            &nbsp;&nbsp;float n = rs.getFloat ("PRICE");<br>
+            &nbsp;&nbsp;System.out.println (s + " " + n);<br>
+            }
+        </div>
+
+        <h3><code>ResultSetMetaData</code> Interface</h3>
+        <p>Metadata means **data about data**. This interface provides methods to get metadata of a table (e.g., total number of columns, column name, column type) from the <code>ResultSet</code> object. It is useful for inspecting database schema information dynamically.</p>
+        
+        <hr>
+
+        <!-- ========================================================= -->
+        <h2>JDBC Data Source Architecture</h2>
+        <p>This architecture represents a more enterprise-level approach, often involving JNDI (Java Naming and Directory Interface) for managing connections centrally, improving performance and scalability.</p>
+        <p>The flow is typically: **Application** &rarr; **JNDI** &rarr; **Connection Manager** &rarr; **JDBC** &rarr; **Database**.</p>
+        
+        <div class="diagram-container">
+            <!-- Updated source using the GFG link provided by the user -->
+            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200229213833/Architecture-of-JDBC2.jpg" 
+                 alt="Diagram showing the JDBC Data Source Architecture, including Application, JNDI, Connection Manager, JDBC, and Database.">
+        </div>
+        
+    </main>
+
+    <footer>
+        <p><a href="index.html">Home</a> <a href="git.html">Next Unit → GIT</a> <br>&copy; 2025 Web Technologies Hub. All rights reserved.</p>
+        <p>Developed by: Jashwanth & Shashank</p>
+    </footer>
+
+</body>
+</html>
